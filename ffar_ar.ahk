@@ -1,4 +1,6 @@
 #Include %A_AppData%\XIM Link\ScriptAdditionals\AHK_ADDITIONALS.ahk
+#Include %A_MyDocuments%\XIM Link\Scripts\util.ahk
+
 #NoEnv
 #InstallKeybdHook
 #InstallMouseHook
@@ -14,49 +16,32 @@ SetWinDelay, -1
 SetBatchLines, -1
 SetControlDelay -1
 
-; Constants
-health := 150
-burst_sleep := 300
+;; Configuration Variables
+gun_id := "ffar"
+pull_x := -65
+pull_y := 225
 
-; Per Gun Config
-;; AK74u
-rpm := 909
-damage := 28
+; shouldn't need to change from here down
+INIRead, burst_sleep, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, constants, burst_sleep
+INIRead, health, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, constants, health
+config := build_config(gun_id)
+gun := new Weapon(config, health)
 
-; Values
-global shots_to_kill := health / damage
-time_to_kill := shots_to_kill / (rpm / 60)
-global bullet_duration := time_to_kill / shots_to_kill * 1000 ;to milliseconds
+MsgBox, % gun.TTK
+
+; Bindings
+is_enabled := true
+WheelUp::is_enabled := ! is_enabled
+WheelDown::Suspend
+~LButton::main(gun, burst_sleep)
 
 ; Functions
-main() {
-    global isEnabled, burst_sleep
-    if %isEnabled% {
+main(weapon, burst_sleep) {
+    global is_enabled, pull_x, pull_y
+    if %is_enabled% {
         while GetKeyState("LButton", "P") {
-            burst()
-            Sleep %burst_sleep%
+            burstAR(weapon, pull_x, pull_y)
+            Sleep burst_sleep
         }
     }
 }
-
-burst() {
-    global
-    Click, down
-    Loop %shots_to_kill% {
-        Sleep %bullet_duration%
-        mouseXY(-65, 225)
-    }
-    Click, up
-}
-
-mouseXY(x,y) {
-    DllCall("mouse_event",uint,1,int,x,int,y,uint,0,int,0)
-    Sleep 1
-}
-
-; Bindings
-isEnabled := true
-WheelUp::isEnabled := ! isEnabled
-~LButton::main()
-
-WheelDown::Suspend

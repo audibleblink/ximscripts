@@ -1,4 +1,6 @@
 #Include %A_AppData%\XIM Link\ScriptAdditionals\AHK_ADDITIONALS.ahk
+#Include %A_MyDocuments%\XIM Link\Scripts\util.ahk
+
 #NoEnv
 #InstallKeybdHook
 #InstallMouseHook
@@ -14,39 +16,22 @@ SetWinDelay, -1
 SetBatchLines, -1
 SetControlDelay -1
 
-; Per Gun Config
-rpm := 675
-global stk := 6
-
-; Advanced
-ttk := stk / (rpm / 60)
-global bullet_time := ttk / stk * 1000
+;; Configuration Variables
+bullets_per_burst := 3
+sleep_btwn_bursts := 250
 
 ; Bindings
 isEnabled := true
 WheelUp::isEnabled := ! isEnabled
 WheelDown::Suspend
-~LButton::main()
+~LButton::main(bullets_per_burst, sleep_btwn_bursts)
 
-burst() {
-    global
-    Loop 3 {
-        if GetKeyState("LButton", "P") {
-            Click, down
-            Sleep %bullet_time%
-            Click, up
-            Sleep %bullet_time%
-        }
-    }
-}
-
-main() {
+main(times, rest) {
     global isEnabled
     if %isEnabled% {
         while GetKeyState("LButton", "P"){
-            burst()
-            Sleep 250
+            autofire(times)
+            Sleep rest
         }
     }
 }
-
