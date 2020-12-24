@@ -7,36 +7,56 @@
 #KeyHistory 0
 #UseHook
 SendMode Input
-SetDefaultMouseSpeed, 0
-SetMouseDelay, 10
+SetDefaultMouseSpeed, 50
+SetMouseDelay, 5
 SetKeyDelay, -1
 SetWinDelay, -1
 SetBatchLines, -1
 SetControlDelay -1
 
-; Per Gun Config
-rpm := 909
-global stk := 6
+; Constants
+health := 150
+burst_sleep := 300
 
-; Advanced
-ttk := stk / (rpm / 60)          ; 0.396 seconds
-global bullet_time := ttk / stk * 1000  ; 0.056 seconds / 56ms
+; Per Gun Config
+;; AK74u
+rpm := 909
+damage := 28
+
+; Values
+global shots_to_kill := health / damage
+time_to_kill := shots_to_kill / (rpm / 60)
+global bullet_duration := time_to_kill / shots_to_kill * 1000 ;to milliseconds
+
+; Functions
+main() {
+    global isEnabled, burst_sleep
+    if %isEnabled% {
+        while GetKeyState("LButton", "P") {
+            burst()
+            Sleep %burst_sleep%
+        }
+    }
+}
+
+burst() {
+    global
+    Click, down
+    Loop %shots_to_kill% {
+        Sleep %bullet_duration%
+        mouseXY(-65, 225)
+    }
+    Click, up
+}
+
+mouseXY(x,y) {
+    DllCall("mouse_event",uint,1,int,x,int,y,uint,0,int,0)
+    Sleep 1
+}
 
 ; Bindings
 isEnabled := true
 WheelUp::isEnabled := ! isEnabled
-~LButton::burst()
-
-burst() {
-    global
-    if isEnabled {
-        Click, down
-        Loop %stk% {
-            Sleep %bullet_time%
-            MouseMove -125, -100, , R
-        }
-        Click, up
-    }
-}
+~LButton::main()
 
 WheelDown::Suspend
