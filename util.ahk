@@ -1,3 +1,4 @@
+#Include %A_AppData%\XIM Link\ScriptAdditionals\AHK_ADDITIONALS.ahk
 class Weapon{
 
     __New(weapon_config, health) {
@@ -20,12 +21,11 @@ class Weapon{
 
 }
 
-burstAR(weapon, x, y) {
+burstAR(weapon, deg, speed) {
     Click, down
-    Loop % weapon.STK {
-        Sleep % weapon.ShotDuration
-        mouseXY(x, y)
-    }
+    XIMInputData("RightStickDirectional", deg, speed)
+    Sleep % weapon.TTK * 1000 
+    XIMInputData("RightStickDirectional", -1)
     Click, up
 }
 
@@ -46,11 +46,6 @@ autofire(times) {
             Sleep 58
         }
     }
-}
-
-mouseXY(x,y) {
-    DllCall("mouse_event",uint,1,int,x,int,y,uint,0,int,0)
-    Sleep 1
 }
 
 build_config(gun_id) {

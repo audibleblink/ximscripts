@@ -18,16 +18,14 @@ SetControlDelay -1
 
 ;; Configuration Variables
 gun_id := "ffar"
-pull_x := -65
-pull_y := 225
+degrees := 190
+speed := 30
 
 ; shouldn't need to change from here down
 INIRead, burst_sleep, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, constants, burst_sleep
 INIRead, health, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, constants, health
 config := build_config(gun_id)
 gun := new Weapon(config, health)
-
-MsgBox, % gun.TTK
 
 ; Bindings
 is_enabled := true
@@ -37,10 +35,10 @@ WheelDown::Suspend
 
 ; Functions
 main(weapon, burst_sleep) {
-    global is_enabled, pull_x, pull_y
+    global is_enabled, degrees, speed
     if %is_enabled% {
         while GetKeyState("LButton", "P") {
-            burstAR(weapon, pull_x, pull_y)
+            burstAR(weapon, degrees, speed)
             Sleep burst_sleep
         }
     }

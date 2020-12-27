@@ -17,15 +17,16 @@ SetBatchLines, -1
 SetControlDelay -1
 
 ;; Configuration Variables
-gun_id := "ak74u"
+gun_id := "groza"
 degrees := 200
-speed := 30
+speed := 35
 
 ; shouldn't need to change from here down
 INIRead, burst_sleep, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, constants, burst_sleep
 INIRead, health, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, constants, health
 config := build_config(gun_id)
 gun := new Weapon(config, health)
+
 
 ; Bindings
 is_enabled := true

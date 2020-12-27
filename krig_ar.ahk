@@ -17,9 +17,9 @@ SetBatchLines, -1
 SetControlDelay -1
 
 ;; Configuration Variables
-gun_id := "ak74u"
-degrees := 200
-speed := 30
+gun_id := "krig"
+degrees := 175
+speed := 23
 
 ; shouldn't need to change from here down
 INIRead, burst_sleep, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, constants, burst_sleep

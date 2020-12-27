@@ -18,8 +18,8 @@ SetControlDelay -1
 
 ;; Configuration Variables
 gun_id := "ak74u"
-degrees := 200
-speed := 30
+degrees := 190
+speed := 35
 
 ; shouldn't need to change from here down
 INIRead, burst_sleep, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, constants, burst_sleep
