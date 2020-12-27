@@ -80,3 +80,20 @@ fire(weapon, burst_sleep) {
 global burst_sleep, health
 INIRead, burst_sleep, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, constants, burst_sleep
 INIRead, health, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, constants, health
+
+
+;; 180 Turn on "s" doubletap
+s::
+ {
+   XIMInputData("LeftStickDirectional",180)
+   KeyWait, s
+   XIMInputData("LeftStickDirectional", -1)
+   KeyWait, s, D T1
+   If (!ErrorLevel)
+    {
+        XIMInputData("RightStickDirectional",90)
+        Sleep 260
+        XIMInputData("RightStickDirectional", -1)
+    }
+}
+return
