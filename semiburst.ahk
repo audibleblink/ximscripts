@@ -35,3 +35,5 @@ main(times, rest) {
         }
     }
 }
+
+#Include %A_MyDocuments%\XIM Link\Scripts\misc.ahk

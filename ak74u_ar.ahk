@@ -14,3 +14,5 @@ is_enabled := true
 WheelUp::is_enabled := ! is_enabled
 WheelDown::Suspend
 ~LButton::fire(gun, burst_sleep)
+
+#Include %A_MyDocuments%\XIM Link\Scripts\misc.ahk
