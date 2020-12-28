@@ -47,3 +47,5 @@ main() {
 }
 
 WheelDown::Suspend
+
+#Include %A_MyDocuments%\XIM Link\Scripts\misc.ahk
