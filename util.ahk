@@ -87,10 +87,35 @@ fire(weapon, burst_sleep) {
    }
 }
 
+quickscope(ads) {
+   global is_enabled
+   if GetKeyState("RButton", "P") {
+       Click, down
+       Sleep 1
+       Click, up
+       Sleep 1
+       return
+   }
+
+   if %is_enabled% {
+        Click, down, right
+        Sleep 1
+        Sleep %ads%
+        if GetKeyState("LButton", "P") {
+            Click, down
+            Sleep 1
+            Click, up
+            Sleep 1
+        }
+        Click, up, right
+   }
+}
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Global Vars
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 global burst_sleep, health
 INIRead, burst_sleep, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, constants, burst_sleep
 INIRead, health, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, constants, health
