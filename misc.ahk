@@ -11,16 +11,16 @@ s::
    If (!ErrorLevel)
     {
         XIMInputData("RightStickDirectional",90)
-        Sleep 260
+        Sleep 257
         XIMInputData("RightStickDirectional", -1)
     }
 }
 return
 
+;; Slide Cancel
 is_sliding := 0
 should_cancel := 1
 
-; Slide Cancel
 ~LCtrl::
    {
       sprint := "Button1" ;; LS click

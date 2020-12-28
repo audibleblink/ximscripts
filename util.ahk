@@ -29,7 +29,7 @@ class Weapon{
 ;; bursts a weapon and performs anti-recoil for the duration
 ;; of the weapon's ttk (times any multipliers)
 burstAR(weapon) {
-   mult := 1.5
+   mult := 1.2
    Click, down
    XIMInputData("RightStickDirectional", weapon.Degrees, weapon.Speed)
    Sleep % weapon.TTK * 1000 * mult
