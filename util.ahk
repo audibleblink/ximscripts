@@ -1,5 +1,23 @@
 #Include %A_AppData%\XIM Link\ScriptAdditionals\AHK_ADDITIONALS.ahk
 
+;; build the gun configuration necessary to pass the the weapon class
+;; values are read from weapons.ini in the same directory
+build_config(gun_id) {
+   INIRead, name, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, %gun_id%, name
+   INIRead, damage, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, %gun_id%, damage
+   INIRead, rpm, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, %gun_id%, rpm
+   INIRead, degrees, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, %gun_id%, degrees
+   INIRead, speed, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, %gun_id%, speed
+
+   config := {}
+   config.name := name
+   config.damage := damage
+   config.rpm := rpm
+   config.degrees := degrees
+   config.speed := speed
+   return config
+}
+
 ;; Creates a weapon instance for storing and calculating stats
 ;; needed to perform anti-recoil and other functions
 class Weapon{
@@ -26,9 +44,23 @@ class Weapon{
 
 }
 
+;; fire is the callback function for assigning to 
+;; the left mouse button
+fireHandler(callback, weapon, sleep_time) {
+   global is_enabled
+
+   if %is_enabled% {
+      while GetKeyState("LButton", "P") {
+          %callback%(weapon)
+          Sleep sleep_time
+      }
+   }
+}
+
+
 ;; bursts a weapon and performs anti-recoil for the duration
 ;; of the weapon's ttk (times any multipliers)
-burstAR(weapon) {
+antiRecoilBurst(weapon) {
    mult := 1.2
    Click, down
    XIMInputData("RightStickDirectional", weapon.Degrees, weapon.Speed)
@@ -37,12 +69,25 @@ burstAR(weapon) {
    Click, up
 }
 
-;; bursts a weapon
-burst(weapon) {
+
+;; bursts a weapon without AR
+onlyBurst(weapon) {
    Click, down
-   Sleep % weapon.TTK * 1000
+   Sleep % weapon.TTK
+   Click, up
+   Sleep 1
+}
+
+
+;; perform only anti-recoil logic, no bursting
+onlyAntiRecoil(weapon) {
+   Click, down
+   XIMInputData("RightStickDirectional", weapon.Degrees, weapon.Speed)
+   KeyWait, LButton
+   XIMInputData("RightStickDirectional", -1)
    Click, up
 }
+
 
 ;; autofire a semi-auto weapon n times
 autofire(times) {
@@ -54,51 +99,6 @@ autofire(times) {
          Sleep 58
       }
    }
-}
-
-
-;; build the gun configuration necessary to pass the the weapon class
-;; values are read from weapons.ini in the same directory
-build_config(gun_id) {
-   INIRead, name, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, %gun_id%, name
-   INIRead, damage, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, %gun_id%, damage
-   INIRead, rpm, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, %gun_id%, rpm
-   INIRead, degrees, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, %gun_id%, degrees
-   INIRead, speed, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, %gun_id%, speed
-
-   config := {}
-   config.name := name
-   config.damage := damage
-   config.rpm := rpm
-   config.degrees := degrees
-   config.speed := speed
-   return config
-}
-
-;; fire is the callback function for assigning to 
-;; the left mouse button
-;; pass burst_sleep = 0 to disable bursting
-fire(weapon, burst_sleep) {
-   global is_enabled
-   if %is_enabled% {
-      while GetKeyState("LButton", "P") {
-          if (burst_sleep) {
-            burstAR(weapon)
-            Sleep burst_sleep
-          } else {
-              noBurstAR(weapon)
-          }
-      }
-   }
-}
-
-;; perform only anti-recoil logic, no bursting
-noBurstAR(weapon) {
-   Click, down
-   XIMInputData("RightStickDirectional", weapon.Degrees, weapon.Speed)
-   KeyWait, LButton
-   XIMInputData("RightStickDirectional", -1)
-   Click, up
 }
 
 
