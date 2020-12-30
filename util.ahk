@@ -77,16 +77,33 @@ build_config(gun_id) {
 
 ;; fire is the callback function for assigning to 
 ;; the left mouse button
+;; pass burst_sleep = 0 to disable bursting
 fire(weapon, burst_sleep) {
    global is_enabled
    if %is_enabled% {
       while GetKeyState("LButton", "P") {
-         burstAR(weapon)
-         Sleep burst_sleep
+          if (burst_sleep) {
+            burstAR(weapon)
+            Sleep burst_sleep
+          } else {
+              noBurstAR(weapon)
+          }
       }
    }
 }
 
+;; perform only anti-recoil logic, no bursting
+noBurstAR(weapon) {
+   Click, down
+   XIMInputData("RightStickDirectional", weapon.Degrees, weapon.Speed)
+   KeyWait, LButton
+   XIMInputData("RightStickDirectional", -1)
+   Click, up
+}
+
+
+;; quickscope on unique, only left-mouse-btn presses
+;; operate as normal fire if held together with right-mouse-btn
 quickscope(ads) {
    global is_enabled
    if GetKeyState("RButton", "P") {
