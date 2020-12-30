@@ -2,18 +2,11 @@
 
 
 ;; 180 Turn on "s" doubletap
-s::
+~x::
  {
-   XIMInputData("LeftStickDirectional",180)
-   KeyWait, s
-   XIMInputData("LeftStickDirectional", -1)
-   KeyWait, s, D T1
-   If (!ErrorLevel)
-    {
-        XIMInputData("RightStickDirectional",90)
-        Sleep 257
-        XIMInputData("RightStickDirectional", -1)
-    }
+    XIMInputData("RightStickDirectional",90)
+    Sleep 257
+    XIMInputData("RightStickDirectional", -1)
 }
 return
 
