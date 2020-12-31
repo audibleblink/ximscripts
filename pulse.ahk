@@ -9,8 +9,8 @@ weapon.TTK := 600 ;; milliseconds to fold burst
 
 ; Bindings
 isEnabled := true
-WheelUp::isEnabled := ! isEnabled
-WheelDown::Suspend
+PgUp::isEnabled := ! isEnabled
+PgDn::Suspend
 ~LButton::fireHandler(func("onlyBurst"), weapon, burst_sleep)
 
 #Include %A_MyDocuments%\XIM Link\Scripts\misc.ahk

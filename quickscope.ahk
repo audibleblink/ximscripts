@@ -9,8 +9,8 @@ IniRead, ads, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, %gun_id%, ads
 
 ; Bindings
 is_enabled := true
-WheelUp::is_enabled := ! is_enabled
-WheelDown::Suspend
+PgUp::is_enabled := ! is_enabled
+PgDn::Suspend
 
 LButton::quickscope(ads)
 

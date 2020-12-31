@@ -7,8 +7,8 @@ bullets_per_burst := 3
 
 ; Bindings
 is_enabled := true
-WheelUp::is_enabled := ! is_enabled
-WheelDown::Suspend
+PgUp::is_enabled := ! is_enabled
+PgDn::Suspend
 ~LButton::fireHandler(func("autofire"), bullets_per_burst, burst_sleep)
 
 #Include %A_MyDocuments%\XIM Link\Scripts\misc.ahk
