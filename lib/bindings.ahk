@@ -63,3 +63,6 @@ return
       should_cancel = 1
    }
 return
+
+PgUp::is_enabled := ! is_enabled
+PgDn::Suspend

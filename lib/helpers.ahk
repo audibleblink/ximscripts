@@ -1,5 +1,18 @@
 #Include %A_AppData%\XIM Link\ScriptAdditionals\AHK_ADDITIONALS.ahk
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Global Vars
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+global burst_sleep, health
+INIRead, burst_sleep, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, constants, burst_sleep
+INIRead, health, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, constants, health
+is_enabled := true
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Classes
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ;; build the gun configuration necessary to pass the the weapon class
 ;; values are read from weapons.ini in the same directory
 build_config(gun_id) {
@@ -43,6 +56,11 @@ class Weapon{
    }
 
 }
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Utility Classes
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; fire is the callback function for assigning to 
 ;; the left mouse button
@@ -127,12 +145,3 @@ quickscope(ads) {
         Click, up, right
    }
 }
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Global Vars
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-global burst_sleep, health
-INIRead, burst_sleep, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, constants, burst_sleep
-INIRead, health, %A_MyDocuments%\XIM Link\Scripts\weapons.ini, constants, health

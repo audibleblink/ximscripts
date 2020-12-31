@@ -5,12 +5,8 @@
 
 ;; Dummy generic weapon
 weapon := new Weapon()
-weapon.TTK := 600 ;; milliseconds to fold burst
+weapon.TTK := 550 ;; milliseconds to hold burst
 
-; Bindings
-isEnabled := true
-PgUp::isEnabled := ! isEnabled
-PgDn::Suspend
 ~LButton::fireHandler(func("onlyBurst"), weapon, burst_sleep)
 
 #Include %A_MyDocuments%\XIM Link\Scripts\lib\bindings.ahk
