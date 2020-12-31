@@ -1,5 +1,5 @@
 #Include %A_AppData%\XIM Link\ScriptAdditionals\AHK_ADDITIONALS.ahk
-#Include %A_MyDocuments%\XIM Link\Scripts\util.ahk
+#Include %A_MyDocuments%\XIM Link\Scripts\lib\helpers.ahk
 
 #NoEnv
 
@@ -14,4 +14,4 @@ PgDn::Suspend
 
 LButton::quickscope(ads)
 
-#Include %A_MyDocuments%\XIM Link\Scripts\misc.ahk
+#Include %A_MyDocuments%\XIM Link\Scripts\lib\bindings.ahk

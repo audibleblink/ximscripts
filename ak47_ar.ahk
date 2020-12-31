@@ -1,5 +1,5 @@
 #Include %A_AppData%\XIM Link\ScriptAdditionals\AHK_ADDITIONALS.ahk
-#Include %A_MyDocuments%\XIM Link\Scripts\util.ahk
+#Include %A_MyDocuments%\XIM Link\Scripts\lib\helpers.ahk
 
 #NoEnv
 
@@ -11,8 +11,8 @@ gun := new Weapon(config, health)
 
 ; Bindings
 is_enabled := true
-WheelUp::is_enabled := ! is_enabled
-WheelDown::Suspend
+PgUp::is_enabled := ! is_enabled
+PgDn::Suspend
 ~LButton::fireHandler(func("antiRecoilBurst"), gun, burst_sleep)
 
-#Include %A_MyDocuments%\XIM Link\Scripts\misc.ahk
+#Include %A_MyDocuments%\XIM Link\Scripts\lib\bindings.ahk

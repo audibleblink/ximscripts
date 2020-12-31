@@ -1,8 +1,10 @@
 #Include %A_AppData%\XIM Link\ScriptAdditionals\AHK_ADDITIONALS.ahk
 
 
-;; 180 Turn on "s" doubletap
-~x::
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; 180 Turn
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+WheelDown::
  {
     XIMInputData("RightStickDirectional",90)
     Sleep 257
@@ -10,7 +12,10 @@
 }
 return
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Slide Cancel
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 is_sliding := 0
 should_cancel := 1
 
@@ -58,23 +63,3 @@ return
       should_cancel = 1
    }
 return
-
-; p::
-; {
-
-;          XIMInputData("Button1", 1)
-;          sleep 50
-;          XIMInputData("Button1", 0)
-;          sleep 50
-; }
-; return
-
-; l::
-; {
-
-;          XIMInputData("Button2", 1)
-;          sleep 50
-;          XIMInputData("Button2", 0)
-;          sleep 50
-; }
-; return

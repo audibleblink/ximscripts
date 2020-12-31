@@ -1,5 +1,5 @@
 #Include %A_AppData%\XIM Link\ScriptAdditionals\AHK_ADDITIONALS.ahk
-#Include %A_MyDocuments%\XIM Link\Scripts\util.ahk
+#Include %A_MyDocuments%\XIM Link\Scripts\lib\helpers.ahk
 
 #NoEnv
 
@@ -13,4 +13,4 @@ PgUp::isEnabled := ! isEnabled
 PgDn::Suspend
 ~LButton::fireHandler(func("onlyBurst"), weapon, burst_sleep)
 
-#Include %A_MyDocuments%\XIM Link\Scripts\misc.ahk
+#Include %A_MyDocuments%\XIM Link\Scripts\lib\bindings.ahk
