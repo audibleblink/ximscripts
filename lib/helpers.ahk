@@ -120,6 +120,23 @@ autofire(times) {
 }
 
 
+;; repeatedly fires akimbo weapons
+dualAuto(times) {
+   Loop %times% {
+      if GetKeyState("LButton", "P") {
+         Click, down
+         Sleep 40
+         Click, down, right
+         Sleep 100
+         Click, up, right
+         Sleep 10
+         Click, up
+         Sleep 10
+      }
+   }
+}
+
+
 ;; quickscope on unique, only left-mouse-btn presses
 ;; operate as normal fire if held together with right-mouse-btn
 quickscope(ads) {

@@ -104,6 +104,9 @@ autofire(times)
 ;; quickscope on unique, only left-mouse-btn presses
 ;; operate as normal fire if held together with right-mouse-btn
 quickscope(ads_time)
+
+;; repeatedly fires akimbo weapons
+dualAuto(times)
 ```
 
 The following is a blank template for creating a new weapon profile.
