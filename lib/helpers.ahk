@@ -65,12 +65,19 @@ class Weapon{
 ;; fire is the callback function for assigning to 
 ;; the left mouse button
 fireHandler(callback, weapon, sleep_time) {
-   global is_enabled
+   global is_enabled, last_reload_start
+
+   ;; reload cancel logic
+   fired := A_NowUTC
+   EnvSub, fired, %last_reload_start%, seconds
+   if (fired < 1.5) {
+      reloadCancel()
+   }
 
    if %is_enabled% {
       while GetKeyState("LButton", "P") {
-          %callback%(weapon)
-          Sleep sleep_time
+         %callback%(weapon)
+         Sleep sleep_time
       }
    }
 }
@@ -142,23 +149,32 @@ dualAuto(times) {
 quickscope(ads) {
    global is_enabled
    if GetKeyState("RButton", "P") {
-       Click, down
-       Sleep 1
-       Click, up
-       Sleep 1
-       return
+      Click, down
+      Sleep 1
+      Click, up
+      Sleep 1
+      return
    }
 
    if %is_enabled% {
-        Click, down, right
-        Sleep 1
-        Sleep %ads%
-        if GetKeyState("LButton", "P") {
-            Click, down
-            Sleep 1
-            Click, up
-            Sleep 1
-        }
-        Click, up, right
+      Click, down, right
+      Sleep 1
+      Sleep %ads%
+      if GetKeyState("LButton", "P") {
+         Click, down
+         Sleep 1
+         Click, up
+         Sleep 1
+      }
+      Click, up, right
+   }
+}
+
+reloadCancel() {
+   Loop 2 {
+      XIMInputData("Button3", 1)
+      Sleep 50
+      XIMInputData("Button3", 0)
+      Sleep 50
    }
 }

@@ -2,14 +2,26 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Reload Cancel
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+last_reload_start := 0
+
+~R::
+   {
+      last_reload_start := A_NowUTC
+   }
+return
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 180 Turn
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 WheelDown::
- {
-    XIMInputData("RightStickDirectional",90)
-    Sleep 257
-    XIMInputData("RightStickDirectional", -1)
-}
+   {
+      XIMInputData("RightStickDirectional",90)
+      Sleep 257
+      XIMInputData("RightStickDirectional", -1)
+   }
 return
 
 
