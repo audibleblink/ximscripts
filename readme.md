@@ -112,19 +112,31 @@ dualAuto(times)
 The following is a blank template for creating a new weapon profile.
 
 
-```
+```ahk
 #Include %A_AppData%\XIM Link\ScriptAdditionals\AHK_ADDITIONALS.ahk
 #Include %A_MyDocuments%\XIM Link\Scripts\lib\helpers.ahk
 
 #NoEnv
 
 ;; Configuration Variables
-gun_id := "ak47"
+gun_id := "$GUN_ID"
 
 config := build_config(gun_id)
 gun := new Weapon(config, health)
 
-~LButton::fireHandler(func("YOUR DESIRED FUNCTION HERE"), funcArg1, burst_sleep)
+~LButton::fireHandler(func("$DESIRED_FUNCTION_HERE"), $funcArg1, burst_sleep)
 
-#Include %A_MyDocuments%\XIM Link\Scripts\lib\bindings.ahk
+;; optional
+;; #Include %A_MyDocuments%\XIM Link\Scripts\lib\bindings.ahk
 ```
+
+## Bindings
+
+**Reload Cancel**  
+If the Left Mouse button is pressed within 1.5 seconds, the average reload time in-game, a reload cancel will be sent. (Double-taps weapon swap key)
+
+**Slide Cancel**  
+Pressing `LCtrl` down will begin a slide if the character is sprtinging. A 'cancel' will be sent when `Lctrl` is released
+
+**180 Turn**  
+WheelDown will turn the player 180 degrees nearly instantly

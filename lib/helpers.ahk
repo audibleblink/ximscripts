@@ -170,6 +170,8 @@ quickscope(ads) {
    }
 }
 
+
+;; doubletaps the weapon-swap button to cancel reloading
 reloadCancel() {
    Loop 2 {
       XIMInputData("Button3", 1)

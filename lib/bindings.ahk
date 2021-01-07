@@ -1,12 +1,9 @@
 #Include %A_AppData%\XIM Link\ScriptAdditionals\AHK_ADDITIONALS.ahk
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Reload Cancel
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-last_reload_start := 0
-
+lastReloadedAt := 0
 ~R::
    {
       last_reload_start := A_NowUTC
@@ -35,8 +32,7 @@ should_cancel := 1
    {
       sprint := "Button1" ;; LS click
       crouch := "Button2" ;; B
-      ; 0 = release
-      ; 1 = pressed
+      ; 0 = release ; 1 = pressed
       if (!is_sliding)  {
          ; begin sprint
          XIMInputData(sprint, 1)
@@ -62,7 +58,6 @@ return
 
 ~LCtrl up::
    {
-      sprint := "Button1" ;; LS click
       crouch := "Button2" ;; B
       if (should_cancel) {
          ; cancel by pressing crouch again
